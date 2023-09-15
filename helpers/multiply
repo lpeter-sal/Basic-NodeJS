@@ -1,0 +1,48 @@
+const fs = require('fs');
+const color = require('colors')
+
+const createArchive = async(base = 5, listar=false, hasta=10) => {
+
+    try {
+    
+        let exit = '';
+        let consol = '';
+    
+        for (let i = 1; i <= hasta; i++) {
+            
+            exit += ` ${ base } x ${ i } = ${base*i}\n`;
+            consol += ` ${ color.red(base) } ${'x'.green} ${ color.blue(i) } ${'='.green} ${base*i}\n`;
+
+        }
+    
+        if (listar) {
+            console.log('==================='.green);
+            console.log('   Table of: '.green, color.white(base));
+            console.log('==================='.green);
+            console.log(consol);
+        }
+    
+        //WriteFile
+        // fs.writeFile( `table-${base}.txt`, exit, (err) => {
+        //     if (err) throw err;
+            
+        //     console.log('The Table has been saved!');
+        // });
+    
+    
+        //WriteFileSync
+        fs.writeFileSync( `./salida/table-${base}.txt`, exit);
+    
+        return (`table-${base}.txt`);
+        
+    } catch (error) {
+        throw error;
+    }
+
+
+
+}
+
+module.exports = {
+    createArchive
+}
